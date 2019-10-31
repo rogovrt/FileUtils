@@ -17,9 +17,6 @@ public class FileUtils implements AutoCloseable{
                 s = buf.readLine();
             }
         }
-        catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
