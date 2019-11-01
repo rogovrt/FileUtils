@@ -8,22 +8,23 @@ public class FileUtils implements AutoCloseable{
 
     }
 
-    List<String> readAll(String path) {
-        List<String> lines = new ArrayList<String>();
+    static List<String> readAll(String path) {
         try (BufferedReader buf = new BufferedReader(new FileReader(path))){
+            List<String> lines = new ArrayList<String>();
             String s = buf.readLine();
             while (s != null) {
                 lines.add(s);
                 s = buf.readLine();
             }
+            return lines;
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
+            return null;
         }
-        return lines;
     }
 
-    void writeAll(String path, List lines) {
+    static void writeAll(String path, List lines) {
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(path))) {
             for (int i = 0; i < lines.size(); i++) {
                 pw.println(lines.get(i));
@@ -34,7 +35,7 @@ public class FileUtils implements AutoCloseable{
         }
     }
 
-    void copy(String sourceFile, String destinationFile) {
+    static void copy(String sourceFile, String destinationFile) {
         File source = new File(sourceFile);
         File destination = new File(destinationFile);
         try (FileChannel sourseChannel = new FileInputStream(source).getChannel()) {
@@ -50,7 +51,7 @@ public class FileUtils implements AutoCloseable{
         }
     }
 
-    void delete(String path) {
+    static void delete(String path) {
         File f = new File(path);
         try {
             if (!f.delete())
