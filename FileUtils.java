@@ -3,12 +3,8 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileUtils implements AutoCloseable {
-    public void close() {
-
-    }
-
-    static List<String> readAll(String path) {
+public class FileUtils {
+    static List<String> readAll(String path) throws IOException {
         try (BufferedReader buf = new BufferedReader(new FileReader(path))) {
             List<String> lines = new ArrayList<String>();
             String s = buf.readLine();
@@ -18,7 +14,7 @@ public class FileUtils implements AutoCloseable {
             }
             return lines;
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new IOException();
         }
     }
 
